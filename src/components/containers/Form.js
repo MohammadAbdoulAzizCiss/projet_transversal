@@ -4,6 +4,7 @@ export default function Form({ children, submitHandler, btnName = "submit" }) {
   return (
     <Box
       boxShadow={3}
+      height="50%"
       padding="5%"
       display="flex"
       flexDirection="column"
