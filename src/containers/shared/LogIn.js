@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { styled } from "@material-ui/styles";
 import { Box, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import ProjectInput from "./utils/ProjectInput";
-import ProjectForm from "./containers/ProjectForm";
+import ProjectInput from "../../components/ProjectInput";
+import ProjectForm from "../../components/ProjectForm";
 // import { GREEN } from "../misc/colors";
 
 export default function LogIn() {
