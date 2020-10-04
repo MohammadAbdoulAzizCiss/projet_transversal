@@ -1,35 +1,61 @@
-import React from "react";
-import FormPage from "./containers/FormPage";
-import { UndrawMotherhood } from "react-undraw-illustrations";
-import Form from "./containers/Form";
+import React, { useEffect, useState } from "react";
+import { styled } from "@material-ui/styles";
+import { Box, Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import ProjectInput from "./utils/ProjectInput";
-import { GREEN } from "../misc/colors";
-import ImgContainer from "./containers/ImgContainer";
-import { Button } from "@material-ui/core";
+import ProjectForm from "./containers/ProjectForm";
+// import { GREEN } from "../misc/colors";
+
 export default function SignUp() {
+  let [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const LogInLink = styled(Link)({
+    textAlign: "center",
+    color: "#000000",
+  });
+
+  const PageLayout = styled(Box)({
+    display: "flex",
+    flexDirection: "row",
+    margin: "15%",
+    justifyContent: "space-around",
+  });
+
+  const updateUser = (e) => {
+    let { name, value } = e.target;
+    let newUser = { ...user };
+    newUser[name] = value;
+    setUser(newUser);
+  };
   return (
-    <FormPage
-      left={
-        <ImgContainer
-          undraw_img={<UndrawMotherhood primaryColor={GREEN} height="100%" />}
+    <PageLayout>
+      <ProjectForm>
+        <ProjectInput
+          name="name"
+          handler={updateUser}
+          required={true}
+          value={user.name}
         />
-      }
-      right={
-        <Form>
-          <h1 color={GREEN}> SIGN UP</h1>
-          <ProjectInput name="prenom" />
-          <ProjectInput name="nom" />
-          <ProjectInput name="age" />
-          <ProjectInput name="email" />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ margin: "10px" }}
-          >
-            sign up
-          </Button>
-        </Form>
-      }
-    />
+        <ProjectInput
+          name="email"
+          value={user.email}
+          required={true}
+          handler={updateUser}
+        />
+        <ProjectInput
+          name="password"
+          type="password"
+          value={user.password}
+          required={true}
+          handler={updateUser}
+        />
+        <Button> Sign Up</Button>
+        <LogInLink to="/login">already have an account ?</LogInLink>
+      </ProjectForm>
+    </PageLayout>
   );
 }
