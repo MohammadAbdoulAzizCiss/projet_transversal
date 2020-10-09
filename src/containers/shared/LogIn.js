@@ -1,55 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { styled } from "@material-ui/styles";
-import { Box, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import React from "react";
 import ProjectInput from "../../components/ProjectInput";
-import ProjectForm from "../../components/ProjectForm";
-// import { GREEN } from "../misc/colors";
+import Lottie from "react-lottie";
+import animationData from "../../lotties/fly-on-rocket.json";
 
 export default function LogIn() {
-  let [mail, setMail] = useState("");
-  let [password, setPassword] = useState("");
-
-  const SignUpLink = styled(Link)({
-    textAlign: "center",
-    color: "#000000",
-  });
-
-  const PageLayout = styled(Box)({
-    display: "flex",
-    flexDirection: "row",
-    margin: "15%",
-    justifyContent: "space-around",
-  });
-  const updateMail = (e) => {
-    console.log(e.target.value);
-    setMail(e.target.value);
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
   };
-  const updatePassword = (e) => {
-    // e.preventDefault();
-    setPassword(e.target.value);
+  let sysy = {
+    width: "80%",
+    display: "flex",
+    alignItems: "center",
+    color: "#19d6ac",
   };
   return (
-    // replace those two with div
-    <PageLayout>
-      <ProjectForm>
-        <ProjectInput
-          name="mail"
-          type="email"
-          value={mail}
-          required={true}
-          handler={(e) => setMail(e.target.value)}
-        />
-        <ProjectInput
-          name="password"
-          type="password"
-          value={password}
-          required={true}
-          handler={updatePassword}
-        />
-        <Button>login</Button>
-        <SignUpLink to="/signup">or create an account ?</SignUpLink>
-      </ProjectForm>
-    </PageLayout>
+    <div style={sysy}>
+      <Lottie options={defaultOptions} height={400} width={400} />
+      <ProjectInput
+        type="text"
+        disabled={true}
+        placeholder="put something here"
+      />
+    </div>
   );
 }
