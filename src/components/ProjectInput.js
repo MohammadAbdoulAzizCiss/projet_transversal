@@ -12,6 +12,7 @@ export default function ProjectInput({
   disabled = false,
   fullWidth = false,
   readOnly = false,
+  defaultValue=""
 }) {
   const toggleVisible = () => {
     let { type, visible } = password;
@@ -25,7 +26,7 @@ export default function ProjectInput({
   });
   return type === "password" ? (
     <TextField
-    
+      defaultValue=""
       color={"primary"}
       margin="dense"
       name={name}
@@ -47,6 +48,7 @@ export default function ProjectInput({
     />
   ) : (
     <TextField
+    defaultValue=""
       disabled={disabled}
       margin="dense"
       name={name}

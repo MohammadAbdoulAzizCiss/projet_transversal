@@ -3,10 +3,11 @@ import ProjectInput from "../../components/ProjectInput";
 import {Card,Typography,CardContent,Step,Stepper,StepLabel,Button} from "@material-ui/core"
 import {Link} from "react-router-dom"
 import Axios from "axios"
-import animationData from "../../lotties/medical.json";
-
+import {useHistory} from "react-router-dom"
+import {patient} from "../../misc/endpoints"
 
 export default function SignUp() {
+  const history=useHistory()
   const [user,setUser]=useState({
     nom:"",
     prenom:"",
@@ -27,24 +28,25 @@ export default function SignUp() {
     :setActive(1)
   }
   const sendData=()=>{
-    Axios.post("null",user).then()
+    Axios.post(patient,user).then(patient=>
+    history.push("/login",patient)
+    ).catch(error=>error)
   }
   const handleBack=()=>{
     setActive(0)
   }
-  const displayFields=()=>(
-    active===0?
+  const displayFields=(toggler)=>(
+    toggler===0?
     <>
       <ProjectInput required={true} name={"nom"} placeholder={"nom"} handler={handleInputChange} value={user.nom}/>
       <ProjectInput required={true} name={"prenom"} placeholder={"prenom"} handler={handleInputChange} value={user.prenom}/>
       <ProjectInput required={true} name={"CIN"} placeholder={"CIN"} handler={handleInputChange} value={user.CIN}/>
       <ProjectInput required={true} name={"mail"} placeholder={"mail"} handler={handleInputChange} value={user.mail}/>
-      <ProjectInput required={true} name={"numtel"} placeholder={"numtel"} handler={handleInputChange} value={user.numTel}/>
-      <ProjectInput required={true} name={"numFixe"} placeholder={"numFixe"} handler={handleInputChange} value={user.numFixe}/>
-      <ProjectInput required={true} name={"numFixe"} placeholder={"numFixe"} handler={handleInputChange} value={user.numFixe}/>
-      <ProjectInput required={true} name={"addresse"} placeholder={"addresse"} handler={handleInputChange} value={user.addresse}/>
+      <ProjectInput required={true} name={"numTel"} placeholder={"numTel"} handler={handleInputChange} value={user.numTel}/>
     </>:
     <>
+    <ProjectInput required={true} name={"numFixe"} placeholder={"numFixe"} handler={handleInputChange}  value={user.numFixe}/>
+    <ProjectInput required={true} name={"addresse"} placeholder={"addresse"} handler={handleInputChange} value={user.addresse}/>
       <ProjectInput required={true} name={"username"} placeholder={"username"} handler={handleInputChange} value={user.username}/>
       <ProjectInput required={true} name={"password"} placeholder={"password"}  type={"password"} handler={handleInputChange} value={user.password}/>
     </>)
@@ -97,7 +99,7 @@ export default function SignUp() {
       <Typography>Sign Up</Typography>
       <CardContent style={style.card}>
         
-       {displayFields()}
+       {displayFields(active)}
       </CardContent>
      <div>
      <Button
@@ -111,7 +113,7 @@ export default function SignUp() {
       />
      </div>
       {active===0? 
-      <Link to={"/login"}>already have an account?</Link>:null}
+      <Link style={{fontSize:"smaller"}} to={"/login"}>already have an account?</Link>:null}
 
       
     </Card>

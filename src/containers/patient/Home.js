@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Box, Button } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 import Page from "../../components/Page";
+import {useHistory} from "react-router-dom"
 import ListeMedecins from "../../components/listeMedecin";
 import Empty from "../../components/Empty";
 
 export default function Home() {
+  const history=useHistory()
+  let [active, setActive] = useState(0);
+
+  useEffect(()=>{
+   let token= localStorage.getItem("auth-token");
+   if (!token) history.replace("/login")
+  },[])
+
   const medecins = [
     { nom: "kande", prenom: "Moustapha", specialite: "pediatre" },
     { nom: "Ciss", prenom: "Djibril", specialite: "chirurgien" },
@@ -16,12 +25,12 @@ export default function Home() {
     { nom: "Diallo", prenom: "Moustapha", specialite: "pediatre" },
     { nom: "Tall", prenom: "Ibrahima", specialite: "chirurgien" },
   ];
+
   const maincomponents = [
     <Empty message="pas de traitements en cours" />,
     <Empty message="aucun rv prevus" />,
     <ListeMedecins list={medecins} />,
   ];
-  let [active, setActive] = useState(0);
   let TabButton = styled(Button)({
     margin: "2px",
     width: "80%",
@@ -58,10 +67,14 @@ export default function Home() {
     padding: "9px",
   });
   let buttonList = ["traitements", "prendre un rv", "afficher liste medecins"];
+  let logout=()=>{
+  localStorage.removeItem("auth-token")
+  history.push("/login")
+  }
   return (
     <Page direction="column">
       <TopBox>
-        <Button>Log out</Button>
+        <Button onClick={logout}>Log out</Button>
       </TopBox>
       <BottomBox>
         <LeftNavBar>
