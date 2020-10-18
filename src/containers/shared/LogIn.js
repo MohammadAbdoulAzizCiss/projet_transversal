@@ -1,55 +1,75 @@
-import React, { useEffect, useState } from "react";
-import { styled } from "@material-ui/styles";
-import { Box, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import React,{useState} from "react";
 import ProjectInput from "../../components/ProjectInput";
-import ProjectForm from "../../components/ProjectForm";
-// import { GREEN } from "../misc/colors";
+import {Card,Typography,CardContent} from "@material-ui/core"
+import {Link} from "react-router-dom"
+import Lottie from "react-lottie";
+import animationData from "../../lotties/lf20_idfHDi.json";
 
 export default function LogIn() {
-  let [mail, setMail] = useState("");
-  let [password, setPassword] = useState("");
-
-  const SignUpLink = styled(Link)({
-    textAlign: "center",
-    color: "#000000",
-  });
-
-  const PageLayout = styled(Box)({
+  const [user,setUser]=useState({
+    login:"",
+    password:""
+  })
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  let style = {
+   main:{
     display: "flex",
-    flexDirection: "row",
-    margin: "15%",
-    justifyContent: "space-around",
-  });
-  const updateMail = (e) => {
-    console.log(e.target.value);
-    setMail(e.target.value);
+    flexDirection:"column",
+    alignItems:"center"  ,
+    justifyContent:"center"
+ },
+   card:{
+     padding:"5%",
+     display:"flex",
+     flexDirection:"column",
+     justifyContent:"space-around",
+     alignItems:"center",
+
+    },
+    forget:{
+      fontSize:"smaller",
+      color:"grey",
+      
+    }
   };
-  const updatePassword = (e) => {
-    // e.preventDefault();
-    setPassword(e.target.value);
-  };
+  const handleInputChange= e =>{
+    let {name,value}=e.target;
+    let userCpy={...user};
+    userCpy[name]=value;
+    setUser(userCpy)
+  }
   return (
-    // replace those two with div
-    <PageLayout>
-      <ProjectForm>
+    <div style={style.main}>
+      <Lottie options={defaultOptions} height={200} width={200} />
+      <Card style={style.card}>
+      <Typography align="center" display="block">Login </Typography>
+      <CardContent style={style.card}>
+      <ProjectInput
+        name="login"
+        type="text"
+        value={user.login}
+        placeholder="put something here"
+        handler={handleInputChange}
+        /> 
         <ProjectInput
-          name="mail"
-          type="email"
-          value={mail}
-          required={true}
-          handler={(e) => setMail(e.target.value)}
-        />
-        <ProjectInput
-          name="password"
-          type="password"
-          value={password}
-          required={true}
-          handler={updatePassword}
-        />
-        <Button>login</Button>
-        <SignUpLink to="/signup">or create an account ?</SignUpLink>
-      </ProjectForm>
-    </PageLayout>
+        name="password"
+        type="password"
+        value={user.password}
+        placeholder="put something here"
+        handler={handleInputChange}
+        /> 
+      <Typography style={style.forget}>Forgot your password</Typography>
+        
+      </CardContent>
+      <Link to={"/signup"}> don't have account yet ?</Link>
+      </Card>
+    </div>
   );
 }
