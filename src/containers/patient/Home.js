@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(()=>{
    let token= localStorage.getItem("auth-token");
    if (!token) history.replace("/login")
-  },[])
+  },[history])
 
   const medecins = [
     { nom: "kande", prenom: "Moustapha", specialite: "pediatre" },
