@@ -26,7 +26,6 @@ export default function ProjectInput({
   });
   return type === "password" ? (
     <TextField
-      defaultValue=""
       color={"primary"}
       margin="dense"
       name={name}
@@ -48,7 +47,6 @@ export default function ProjectInput({
     />
   ) : (
     <TextField
-    defaultValue=""
       disabled={disabled}
       margin="dense"
       name={name}
