@@ -42,10 +42,10 @@ export default function SignUp() {
       <ProjectInput required={true} name={"prenom"} placeholder={"prenom"} handler={handleInputChange} value={user.prenom}/>
       <ProjectInput required={true} name={"CIN"} placeholder={"CIN"} handler={handleInputChange} value={user.CIN}/>
       <ProjectInput required={true} name={"mail"} placeholder={"mail"} handler={handleInputChange} value={user.mail}/>
-      <ProjectInput required={true} name={"numTel"} placeholder={"numTel"} handler={handleInputChange} value={user.numTel}/>
+      <ProjectInput required={true} name={"numTel"} placeholder={" num telephone"} handler={handleInputChange} value={user.numTel}/>
     </>:
     <>
-    <ProjectInput required={true} name={"numFixe"} placeholder={"numFixe"} handler={handleInputChange}  value={user.telFixe}/>
+    <ProjectInput required={true} name={"telFixe"} placeholder={"num fixe"} handler={handleInputChange}  value={user.telFixe}/>
     <ProjectInput required={true} name={"addresse"} placeholder={"addresse"} handler={handleInputChange} value={user.addresse}/>
       <ProjectInput required={true} name={"username"} placeholder={"username"} handler={handleInputChange} value={user.username}/>
       <ProjectInput required={true} name={"password"} placeholder={"password"}  type={"password"} handler={handleInputChange} value={user.password}/>
